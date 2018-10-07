@@ -7,10 +7,8 @@ namespace KmaOoad18.Assignments.Week5.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<SpecialOffering> SpecialOfferings { get; set; }
         public DbSet<Product> Products { get; set; }
+        public LoyaltyContext(DbContextOptions<LoyaltyContext> options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite($"");
-        }
+        public LoyaltyContext() { }
     }
 }

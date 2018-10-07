@@ -21,22 +21,24 @@ namespace KmaOoad18.Assignments.Week5
         {
             Configuration = configuration;
         }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            string connectionString = Configuration.GetConnectionString("LoyaltyDb");
-
-            services.AddDbContext<DbContext, LoyaltyContext>(options =>
-                options.UseSqlite(connectionString));
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Loyalty API", Version = "v1" });
             });
+
+            
+
+            // Register LoyaltyContext as a service here
+            // E.g.
+            // services.AddDbContext<>(...)
+            // As parameter use this lambda: options => options.UseSqlite("Data Source=loyalty.db")
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +55,8 @@ namespace KmaOoad18.Assignments.Week5
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 });
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

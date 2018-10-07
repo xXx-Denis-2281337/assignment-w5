@@ -2,15 +2,15 @@
 
 namespace KmaOoad18.Assignments.Week5
 {
-
     [Route("api/admin")]
+    [ApiController]
     public class LoyaltyAdminController : ControllerBase
     {
 
         // Adds product with SKU, name, and price
         // SKU is stock keeping unit - unique identifier of product inventory
         [Route("products"), HttpPost]
-        public IActionResult AddProduct([FromBody] string sku, [FromBody] string name, [FromBody] decimal price)
+        public IActionResult AddProduct([FromBody] ProductDto product)
         {
             // Add implementation
 
@@ -22,7 +22,7 @@ namespace KmaOoad18.Assignments.Week5
         // Special offering is either adding extra points, or multiplying normal points by some coefficient
         // extra param is amount to add to normal bonus or coeff to multiply normal bonus by
         [Route("special-offerings"), HttpPost]
-        public IActionResult AddSpecialOffering([FromBody] string sku, [FromBody] Promotion promotion, [FromBody] int extra)
+        public IActionResult AddSpecialOffering([FromBody] PromotionDto promo)
         {
             // Add implementation   
 
@@ -43,25 +43,41 @@ namespace KmaOoad18.Assignments.Week5
 
         // Adds customer to loyalty program
         // Returns new loyalty card ID
-        [Route("customers"), HttpPost]
-        public IActionResult LaunchLoyalty([FromBody] string customerName, [FromBody] string customerPhone)
+        [Route("loyalties"), HttpPost]
+        public ActionResult<string> LaunchLoyalty([FromBody] NewLoyaltyDto newLoyalty)
         {
-            // Add implementation    
+            // Add implementation  
 
-            return Ok();
+            var loyaltyId = string.Empty; // assign ID of created loyalty
+
+            return Ok(loyaltyId);
         }
-
-
-        #region Config
-        // This is to simplify config for testing purposes in this educational project only. Normaly you should avoid such public fields in real life!
-        public static string Db = "loyalty.db";
-        #endregion
     }
 
-    public enum Promotion
+    public class ProductDto
     {
-        AddPoints,
-        MultiplyPoints
+        public string Sku { get; set; }
+        public decimal Price { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class PromotionDto
+    {
+        public string Sku { get; set; }
+        public string PromotionType { get; set; }
+        public int PromotionValue { get; set; }
+    }
+
+    public static class PromotionType
+    {
+        public const string AddPoints = nameof(AddPoints);
+        public const string Multiplier = nameof(Multiplier);
+    }
+
+    public class NewLoyaltyDto
+    {
+        public string CustomerName { get; set; }
+        public string CustomerPhone { get; set; }
     }
 
 
