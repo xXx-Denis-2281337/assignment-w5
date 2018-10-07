@@ -1,5 +1,7 @@
 # Loyalty Web API
 
+[![Join the chat at https://gitter.im/kmaooad18/assignment-w5](https://badges.gitter.im/kmaooad18/assignment-w5.svg)](https://gitter.im/kmaooad18/assignment-w5?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This task is built on top of the previous one (see week 4). Logic remains the same, but shape of the app changes. This time you have to implement loyalty calculations as an ASP.NET Core Web API application.
 
 ## ASP.NET Core
