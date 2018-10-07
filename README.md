@@ -12,7 +12,7 @@ You are provided with the starter code for Web API application. Files you need t
 
 ### DTOs
 
-One special change comparing to old loyalty client is that now controller methods accept parameters shaped in separate classes, e.g. `ProductDto`, `OrderDto` etc. These parameters are automatically deserialized by ASP.NET Core when you make and HTTP request to some URL, but you have to provide data for requests in body of POST request in JSON form.
+One special change comparing to old loyalty client is that now controller methods accept parameters shaped in separate classes, e.g. `ProductDto`, `OrderDto` etc. (DTOs are simple auxillary classes to transfer data between layers or components - see [Fow]). These parameters are automatically deserialized by ASP.NET Core when you make and HTTP request to some URL, but you have to provide data in body of POST request in JSON format.
 
 ### Swagger
 
