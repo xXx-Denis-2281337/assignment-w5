@@ -14,6 +14,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace KmaOoad18.Assignments.Week5
 {
@@ -355,7 +356,9 @@ namespace KmaOoad18.Assignments.Week5
 
             response.EnsureSuccessStatusCode();
 
-            return Decimal.TryParse(await response.Content.ReadAsStringAsync(), out decimal b) ? b : 0m;
+            var responseContent = await response.Content.ReadAsStringAsync();
+            
+            return Decimal.Parse(responseContent, provider: CultureInfo.InvariantCulture);
         }
 
         internal async Task ProcessPurchase(List<(string Sku, int Qty)> list, string loyaltyCard, bool useLoyaltyPoints = false)
