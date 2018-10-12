@@ -311,11 +311,11 @@ namespace KmaOoad18.Assignments.Week5
 
     internal class LoyaltyCustomerTestClient
     {
-        private readonly WebApplicationFactory<SutStartup> _factory;
+        private readonly HttpClient _client;
 
         public LoyaltyCustomerTestClient(WebApplicationFactory<SutStartup> factory)
         {
-            this._factory = factory;
+            this._client = factory.CreateClient();
         }
 
         internal async Task AddProduct(string sku, string name, decimal price)
@@ -349,14 +349,9 @@ namespace KmaOoad18.Assignments.Week5
 
         internal async Task<decimal> LoyaltyBalance(string loyaltyCard)
         {
-            var client = _factory.CreateClient(new WebApplicationFactoryClientOptions
-            {
-                BaseAddress = new Uri("http://localhost:5000")
-            });
-
             var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer/{loyaltyCard}/balance");
 
-            var response = await client.SendAsync(request);
+            var response = await _client.SendAsync(request);
 
             response.EnsureSuccessStatusCode();
 
@@ -373,14 +368,9 @@ namespace KmaOoad18.Assignments.Week5
 
         internal async Task RemoveSpecialOffering(string sku)
         {
-            var client = _factory.CreateClient(new WebApplicationFactoryClientOptions
-            {
-                BaseAddress = new Uri("http://localhost:5000")
-            });
-
             var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/admin/products/{sku}/special-offerings");
 
-            var response = await client.SendAsync(request);
+            var response = await _client.SendAsync(request);
 
             response.EnsureSuccessStatusCode();
         }
@@ -388,16 +378,11 @@ namespace KmaOoad18.Assignments.Week5
 
         private async Task<HttpResponseMessage> Post<T>(string path, T dto)
         {
-            var client = _factory.CreateClient(new WebApplicationFactoryClientOptions
-            {
-                BaseAddress = new Uri("http://localhost:5000")
-            });
-
             var request = new HttpRequestMessage(HttpMethod.Post, path);
 
             request.Content = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
 
-            var response = await client.SendAsync(request);
+            var response = await _client.SendAsync(request);
 
             response.EnsureSuccessStatusCode();
 
