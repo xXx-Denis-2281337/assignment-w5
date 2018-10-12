@@ -21,8 +21,8 @@ namespace KmaOoad18.Assignments.Week5
         // Sets special offering for a given product
         // Special offering is either adding extra points, or multiplying normal points by some coefficient
         // extra param is amount to add to normal bonus or coeff to multiply normal bonus by
-        [Route("special-offerings"), HttpPost]
-        public IActionResult AddSpecialOffering([FromBody] PromotionDto promo)
+        [Route("products/{sku}/special-offerings"), HttpPost]
+        public IActionResult AddSpecialOffering([FromRoute] string sku, [FromBody] PromotionDto promo)
         {
             // Add implementation   
 
@@ -31,11 +31,11 @@ namespace KmaOoad18.Assignments.Week5
 
 
         // Removes all special offerings for the given product
-        [Route("special-offerings/{sku}"), HttpDelete]
+        [Route("products/{sku}/special-offerings"), HttpDelete]
 
         public IActionResult RemoveSpecialOffering([FromRoute] string sku)
         {
-            // Add implementation    
+            // Add implementation   
 
             return Ok();
         }
@@ -63,7 +63,6 @@ namespace KmaOoad18.Assignments.Week5
 
     public class PromotionDto
     {
-        public string Sku { get; set; }
         public string PromotionType { get; set; }
         public int PromotionValue { get; set; }
     }
