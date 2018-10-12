@@ -1,5 +1,7 @@
 # Loyalty Web API
 
+[![Join the chat at https://gitter.im/kmaooad18/assignment-w5](https://badges.gitter.im/kmaooad18/assignment-w5.svg)](https://gitter.im/kmaooad18/assignment-w5?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This task is built on top of the previous one (see week 4). Logic remains the same, but shape of the app changes. This time you have to implement loyalty calculations as an ASP.NET Core Web API application.
 
 ## ASP.NET Core
@@ -10,7 +12,7 @@ You are provided with the starter code for Web API application. Files you need t
 
 ### DTOs
 
-One special change comparing to old loyalty client is that now controller methods accept parameters shaped in separate classes, e.g. `ProductDto`, `OrderDto` etc. These parameters are automatically deserialized by ASP.NET Core when you make and HTTP request to some URL, but you have to provide data for requests in body of POST request in JSON form.
+One special change comparing to old loyalty client is that now controller methods accept parameters shaped in separate classes, e.g. `ProductDto`, `OrderDto` etc. (DTOs are simple auxillary classes to transfer data between layers or components - see [Fow]). These parameters are automatically deserialized by ASP.NET Core when you make and HTTP request to some URL, but you have to provide data in body of POST request in JSON format.
 
 ### Swagger
 
