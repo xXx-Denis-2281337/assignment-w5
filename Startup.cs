@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using KmaOoad18.Assignments.Week5.Data;
+﻿using KmaOoad18.Assignments.Week5.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,12 +28,9 @@ namespace KmaOoad18.Assignments.Week5
                 c.SwaggerDoc("v1", new Info { Title = "Loyalty API", Version = "v1" });
             });
 
-            
-
-            // Register LoyaltyContext as a service here
-            // E.g.
-            // services.AddDbContext<>(...)
-            // As parameter use this lambda: options => options.UseSqlite("Data Source=loyalty.db")
+            services.AddDbContext<LoyaltyContext, LoyaltyContext>(
+                options => options.UseSqlite("Data Source=loyalty.db")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

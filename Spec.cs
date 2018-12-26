@@ -3,6 +3,7 @@ using Xunit;
 using FsCheck;
 using System.Collections.Generic;
 using System;
+using System.Globalization;
 using System.Linq;
 using KmaOoad18.Assignments.Week5.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,6 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
-using System.Globalization;
 
 namespace KmaOoad18.Assignments.Week5
 {
@@ -266,7 +266,7 @@ namespace KmaOoad18.Assignments.Week5
 
         private (List<Product>, List<Purchase>) SeedProducts()
         {
-            var seed = DateTime.Now.Second + 3;
+            var seed = DateTime.Now.Second + 2;
             var factor = (seed % 17) + 4;
             var productSeed = seed * factor;
 
@@ -316,7 +316,7 @@ namespace KmaOoad18.Assignments.Week5
 
         public LoyaltyCustomerTestClient(WebApplicationFactory<SutStartup> factory)
         {
-            this._client = factory.CreateClient();
+            _client = factory.CreateClient();
         }
 
         internal async Task AddProduct(string sku, string name, decimal price)
@@ -357,8 +357,8 @@ namespace KmaOoad18.Assignments.Week5
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            
-            return Decimal.Parse(responseContent, provider: CultureInfo.InvariantCulture);
+
+            return decimal.Parse(responseContent, provider: CultureInfo.InvariantCulture);
         }
 
         internal async Task ProcessPurchase(List<(string Sku, int Qty)> list, string loyaltyCard, bool useLoyaltyPoints = false)
